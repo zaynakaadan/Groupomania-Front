@@ -119,6 +119,8 @@ const options = {
         <span>{{ email }}</span>                 
         <i v-if="currentUser === email" class="bi bi-trash3" @click="deletePost"></i> 
         <i v-if="currentUser === email" class="bi bi-pen" @click="editPost"></i>
+        <i v-if="!currentUser === !email" class="bi bi-hand-thumbs-up-fill" @click="likePost" ></i>
+
         </div>
     <img v-if="url" :src="url" class="card-img-top" alt="..." />
     <div class="card-body">
@@ -172,4 +174,14 @@ const options = {
     color: blue;
     transform: scale(1.2);
 }
+.bi-hand-thumbs-up-fill{
+    font-size:18px ;
+    padding-left: 0.5rem;
+}
+.bi-hand-thumbs-up-fill:hover {
+    cursor: pointer;
+    color: red;
+    transform: scale(1.2);
+}
+
 </style>
