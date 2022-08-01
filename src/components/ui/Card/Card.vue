@@ -91,7 +91,7 @@ const options = {
 const options = {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
-            //"Content-Type": "application/json",
+            
             "Accept": "application/json"
         },
         method: "PUT",
@@ -115,7 +115,36 @@ const options = {
         this.$router.go()       
         })
         .catch((err) => console.log("err:",err))    
-    }
+    },
+    likePost(){
+        const { VITE_SERVER_ADDRESS, VITE_SERVER_PORT }  = import.meta.env    
+    const url = `http://${VITE_SERVER_ADDRESS}:${VITE_SERVER_PORT}/posts`
+const options = {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+            
+        },
+        method: "POST",        
+        }
+        console.log("options:", options)
+        
+        console.log("the request will de sent to the following address:" , url + "/" + this.$props.id)
+        fetch(url + "/" +this.$props.id,  options)
+            .then((res) =>{
+            if (res.status === 200) {
+            return res.json()        
+        } else {
+            throw new Error("failed to like this post")
+        }
+        })
+        .then((res) => {
+        console.log('res:',res)
+        this.$router.go()       
+        })
+        .catch((err) => console.log("err:",err))
+
+    },    
 }
 }
 
