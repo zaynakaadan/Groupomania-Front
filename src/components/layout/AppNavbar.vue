@@ -17,8 +17,7 @@ export default {
     methods: {
       logout() {
         localStorage.removeItem("token")
-        this.$router.push("/login")
-        
+        this.$router.push("/login")        
       }
     }
 }
@@ -30,7 +29,6 @@ export default {
         <router-link to="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
           <Logo class="bi me-2" width="150" height="150" role="img" aria-label="Bootstrap"/>
         </router-link>
-
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><router-link to="/home" class="nav-link px-2 text-secondary">Home</router-link></li>                       
         </ul>        
@@ -56,7 +54,11 @@ export default {
           font-size: 3.5rem;
         }
       }
-
+.btn-primary{
+  background-color: #FFD7D7 !important;
+  border-color:#FD2D01 !important;
+  color:#FD2D01 !important;
+}
 .b-example-divider {
   height: 3rem;
   background-color: rgba(0, 0, 0, .1);
@@ -89,5 +91,6 @@ export default {
 .dropdown-toggle {
   outline: 0;
 }
+
 
 </style>

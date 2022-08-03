@@ -12,11 +12,10 @@ export default {
 <template>
 <AppNavbar />
 <router-view></router-view>  
-
 </template>
 
-<style>
+<style scoped>
 body{
-background-color: #5f5f5f1a !important;
+font-family: 'Lato' !important;
 }
 </style>

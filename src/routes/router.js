@@ -6,13 +6,10 @@ import {createRouter, createWebHistory} from "vue-router"
 // 1. Define route components.
 const routes = [{ path: "/Login", component: LoginPage },
                 { path: "/signup", component: LoginPage },
-                {path: "/home", component: WallPage},
-                
-                
-            ]    
+                {path: "/home", component: WallPage},                                
+                ]    
 // 2. Create the router instance and pass the `routes` option
 const router = createRouter({ history: createWebHistory(), routes })
-
 //Guard
 router.beforeEach((to, from) => {   
 if (isLoginRequires(to)) {
@@ -36,5 +33,4 @@ return !publicPages.includes(to.path)
 function isTokenInCache() {
     return localStorage.getItem("token") !=null
 }
-
 export {router} 

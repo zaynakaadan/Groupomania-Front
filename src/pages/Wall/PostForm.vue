@@ -77,5 +77,12 @@ div span {
 body{
 background-color: lighten(var(--bs-gray-100), 30%) !important;
 }
-
+.btn-primary{
+  background-color: #FFD7D7 !important;
+  border-color:#FD2D01 !important;
+  color:#FD2D01 !important;
+}
+.py-3{
+  font-family: 'Lato' !important;
+}
 </style>

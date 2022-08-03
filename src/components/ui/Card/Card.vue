@@ -10,6 +10,7 @@ export default{
 props: [ "email", "content", "url", "comments", "id", "currentUser" ],
 data() {
 return {
+    
     currentComment: null,
     selectedImage:null
 }
@@ -17,8 +18,9 @@ return {
 mounted() {},   
 methods: {
     handleFileSelected(e) {
-        console.log("e:", e.target.files[0])
-        this.selectedImage = e.target.files[0]
+
+        //console.log("e:", e.target.files[0])
+        //this.selectedImage = e.target.files[0]
       },
     addComment(e){
 console.log(this.currentComment)
@@ -112,7 +114,8 @@ const options = {
         })
         .then((res) => {
         console.log('res:',res)
-        this.$router.go()       
+        //this.$router.go()   
+        this.$router.push("/home") 
         })
         .catch((err) => console.log("err:",err))    
     },
@@ -156,9 +159,9 @@ const options = {
     <img src="./../../../assets/avatar-circle.png" class="rounded-circle shadow-4" alt="Avatar" />
         <span>{{ email }}</span>                 
         <i v-if="currentUser === email" class="bi bi-trash3" @click="deletePost"></i> 
-        
-        
-        <input v-if="currentUser === email" id="file-input" type="file" @click ="updatePost" />
+        <span v-if="selectedImage">{{selectedImage.name}}</span>
+        <input v-if="currentUser === email" id="file-input" type="file" @input="handleFileSelected" />
+        <button v-if="currentUser === email" @click ="updatePost"   type="button"  class="btn btn-primary ms-auto rounded-pill">envoyer</button>
         
         <i v-if="!currentUser === !email" class="bi bi-hand-thumbs-up-fill" @click="likePost" ></i>
 
@@ -167,7 +170,7 @@ const options = {
     <div class="card-body">
     
     <p class="card-text">{{ content }}</p>
-    
+    <i v-if="currentUser === email" class="bi bi-pen" @click="updateContent"></i>
     <div v-for="comment in comments">
     <Comment :email="comment.user.email" :content="comment.content"></Comment>
     </div>
@@ -198,6 +201,10 @@ const options = {
     color: blue;
     transform: scale(1.1);
 }
+
+.rounded-pill{
+    font-size: smaller;
+}
 .card-header {
     display:flex;
     align-items: center;    
@@ -214,7 +221,19 @@ const options = {
     width: 60px;
     margin-right: 0.6rem;
 }
-
+.card-body{
+   position: relative; 
+}
+.card-text{
+    
+    display: flex;
+    align-items: center;
+}
+.bi-pen{
+    position: absolute;
+top: 1rem;
+    right: 1rem;
+}
 .bi-pen:hover {
     cursor: pointer;
     color: blue;
@@ -229,5 +248,16 @@ const options = {
     color: red;
     transform: scale(1.2);
 }
-
+.btn-primary{
+  background-color: #FFD7D7 !important;
+  border-color:#FD2D01 !important;
+}
+.btn:hover {
+    cursor: pointer;
+    color: red;
+    transform: scale(1.1);
+}
+.card-text{
+    font-family: 'Lato' !important;
+}
 </style>

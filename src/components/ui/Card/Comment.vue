@@ -45,4 +45,7 @@ margin-block:0.3rem ;
 .d-flex p:nth-child(1) {
     font-weight: 500;
 }
+body {
+  font-family: var(--bs-font-lato);
+}
 </style>

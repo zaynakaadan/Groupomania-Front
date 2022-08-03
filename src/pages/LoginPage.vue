@@ -72,7 +72,7 @@ fetch(url, options)
     })
     .then((res) => {   
         this.$router.go()
-        //this.$router.push("/home")  
+          
     })
   .catch((err) => {
     this.error = error
@@ -103,7 +103,7 @@ function isFormValid(bool) {
 <template>
 <main class="form-signin">
   <form :class="this.hasInvalidCredentials ? 'hasErrors' : ''">
-    <img class="mb-4 d-block mx-auto" src="../../public/favicon.ico" alt="" width="72" height="57">
+    
     <h1 class="h3 mb-3 fw-normal">{{this.isLoginMode? "Please sign in" : "Please enter your data"}}</h1>
 
     <div class="form-floating">
@@ -118,7 +118,7 @@ function isFormValid(bool) {
       <input type="password" class="form-control"  placeholder="Confirm password" v-model ="confirmPassword" required = "true" @invalid="isFormValid" />
       <label for="floatingPassword">Confirm Password</label>
     </div>
-    <div v-if="hasInvalidCredentials" class="error-msg">Fields cannot be empty</div>
+    <div v-if="hasInvalidCredentials" class="error-msg">Fields cannot be empty must contain at least 8 characters </div>
     <div v-if="!hasInvalidCredentials && error" class="error-msg">{{error}}</div>
     <button v-if="isLoginMode" class="w-100 btn btn-lg btn-primary" type="submit" @click.prevent="() => submitForm(this.email, this.password, this.$router)" :disabled="hasInvalidCredentials" >Sign in</button>
     <button v-if="!isLoginMode" class="w-100 btn btn-lg btn-primary" type="submit" @click.prevent="signUp" :disabled="hasInvalidCredentials" >Register</button>
@@ -128,15 +128,27 @@ function isFormValid(bool) {
 </main>
 </template>
 
-<style >
-
+<style scoped>
+.btn-primary{
+  background-color: #FFD7D7 !important;
+  border-color:#FD2D01 !important;
+  color:#FD2D01 !important;
+}
+.form-signin{
+  padding-top: 3rem !important;
+}
 .hasErrors input{
 border: 1px solid red;
 }
 .error-msg {
   color:red;
 }
-
+.fw-normal{
+  font-family: 'Lato'!important;
+}
+.mb-1{
+  font-family: 'Lato'!important;
+}
 html,
 body {
   align-items: center; 
