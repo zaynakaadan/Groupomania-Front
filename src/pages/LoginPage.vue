@@ -72,7 +72,7 @@ fetch(url, options)
     })
     .then((res) => {   
         this.$router.go()
-          
+         
     })
   .catch((err) => {
     this.error = error
@@ -81,7 +81,7 @@ fetch(url, options)
       }
     },
     watch: {
-      email(Value) {        
+      username(Value) {        
         const isValueEmpty = Value === ""
         this.isFormValid(!isValueEmpty) 
         this.error = null

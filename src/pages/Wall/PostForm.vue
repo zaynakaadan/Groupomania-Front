@@ -50,7 +50,7 @@ export default {
 </script>
 <template>
 <div class="form-floating mt-3">
-  <input  class="form-control py-3" v-model="content"  />    
+<input  class="form-control py-3" v-model="content"  />    
 </div>
 <div class="d-flex">
 <label for="file-input" class="btn btn-secondary mt-1">Add Image</label>
@@ -58,7 +58,6 @@ export default {
 <input id="file-input" type="file" @change="handleFileSelected" />
 <button @click ="handleClick"   type="button"  class="btn btn-primary mt-1 ms-auto ">Post</button>
 </div>
-
 {{content}}
 
 <hr class="dropdown-divider mt-4" />
@@ -72,7 +71,6 @@ export default {
 div span {
   font-size: 0.9rem;
   margin-left: 0.5rem;
-
 }
 body{
 background-color: lighten(var(--bs-gray-100), 30%) !important;

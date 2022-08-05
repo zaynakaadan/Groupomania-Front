@@ -84,7 +84,7 @@ const options = {
         .catch((err) => console.log("err:",err))
 
     },    
-    updatePost(){
+    /*updatePost(){
         const { VITE_SERVER_ADDRESS, VITE_SERVER_PORT }  = import.meta.env    
     const url = `http://${VITE_SERVER_ADDRESS}:${VITE_SERVER_PORT}/posts`
     const formData = new FormData()
@@ -118,7 +118,7 @@ const options = {
         this.$router.push("/home") 
         })
         .catch((err) => console.log("err:",err))    
-    },
+    },*/
     likePost(){
         const { VITE_SERVER_ADDRESS, VITE_SERVER_PORT }  = import.meta.env    
     const url = `http://${VITE_SERVER_ADDRESS}:${VITE_SERVER_PORT}/posts`
@@ -160,8 +160,9 @@ const options = {
         <span>{{ email }}</span>                 
         <i v-if="currentUser === email" class="bi bi-trash3" @click="deletePost"></i> 
         <span v-if="selectedImage">{{selectedImage.name}}</span>
-        <input v-if="currentUser === email" id="file-input" type="file" @input="handleFileSelected" />
-        <button v-if="currentUser === email" @click ="updatePost"   type="button"  class="btn btn-primary ms-auto rounded-pill">envoyer</button>
+        
+        <RouterLink  :to="{name:'EditCategory', params : {id}}"><button  v-if="currentUser === email"    class="btn btn-primary ms-auto rounded-pill">Edit</button></RouterLink>
+        
         
         <i v-if="!currentUser === !email" class="bi bi-hand-thumbs-up-fill" @click="likePost" ></i>
 
@@ -170,6 +171,7 @@ const options = {
     <div class="card-body">
     
     <p class="card-text">{{ content }}</p>
+    <RouterLink  :to="{name:'EditText', params : {id}}"><button  v-if="currentUser === email"    class="btn btn-primary ms-auto rounded-pill">Edit</button></RouterLink>
     <i v-if="currentUser === email" class="bi bi-pen" @click="updateContent"></i>
     <div v-for="comment in comments">
     <Comment :email="comment.user.email" :content="comment.content"></Comment>
