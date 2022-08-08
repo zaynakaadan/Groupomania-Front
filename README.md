@@ -1,4 +1,6 @@
-# groupomania
+# Welcome to the application Groupomania p7 !
+
+This is the frontend for the Groupomania
 
 This template should help get you started developing with Vue 3 in Vite.
 

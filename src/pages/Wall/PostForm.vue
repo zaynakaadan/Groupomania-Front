@@ -4,10 +4,13 @@ export default {
     data () {
       return {
         content: "",
-        selectedImage: null
+        selectedImage: null,
+        
+
       }
     },
     methods: {
+      
       handleFileSelected(e) {
         console.log("e:", e.target.files[0])
         this.selectedImage = e.target.files[0]
@@ -28,7 +31,7 @@ export default {
         body: formData
       }
       console.log("options:", options)
-      fetch(url, options)
+      fetch(url + "/CreatePost", options)
         .then((res) =>{
           console.log("res:", res)
       if (res.status === 200)  return res.json()
@@ -55,6 +58,7 @@ export default {
 <div class="d-flex">
 <label for="file-input" class="btn btn-secondary mt-1">Add Image</label>
 <span v-if="selectedImage">{{selectedImage.name}}</span>
+
 <input id="file-input" type="file" @change="handleFileSelected" />
 <button @click ="handleClick"   type="button"  class="btn btn-primary mt-1 ms-auto ">Post</button>
 </div>

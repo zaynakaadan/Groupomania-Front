@@ -1,11 +1,12 @@
 <script>
 export default {
-    name: "PostForm",
-    props: [ "email", "content", "url", "comments", "id", "currentUser" ],
+    name: "EditCategory",
+    props: [ "email", "content", "url", "id", "currentUser" ],
     data () {
       return {
         content: "",
-        selectedImage: null
+        selectedImage: null,
+        id: 0
       }
     },
     methods: {
@@ -28,8 +29,9 @@ export default {
         method: "POST",
         body: formData
       }
+      console.log(this.$route.name)
       console.log("options:", options)
-      fetch(url, options)
+      fetch(url + "/" + this.$route.name + "/" +this.$route.params.id,  options)
         .then((res) =>{
           console.log("res:", res)
       if (res.status === 200)  return res.json()
@@ -50,6 +52,7 @@ export default {
 }
 </script>
 <template>
+<div class="container-sm">
 <div class="form-floating mt-3">
 <input  class="form-control py-3" v-model="content"  />    
 </div>
@@ -61,7 +64,7 @@ export default {
 </div>
 {{content}}
 
-
+</div>
 </template>
 
 

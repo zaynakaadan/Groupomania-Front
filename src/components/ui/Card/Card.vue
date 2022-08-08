@@ -7,7 +7,7 @@ export default{
     Comment,
     Avatar
 },
-props: [ "email", "content", "url", "comments", "id", "currentUser" ],
+props: [ "email", "content", "url", "comments", "id", "currentUser", "userId", "isAdmin", "nbrFans" ],
 data() {
 return {
     
@@ -39,7 +39,7 @@ const options = {
 
         console.log("options:", options)
 
-        fetch(url + "/" +this.$props.id , options)
+        fetch(url + "/AddComment/" +this.$props.id , options)
         .then((res) =>{
             if (res.status === 200) {
             return res.json()        
@@ -84,69 +84,35 @@ const options = {
         .catch((err) => console.log("err:",err))
 
     },    
-    /*updatePost(){
+    
+    likePost(postId, userId){
         const { VITE_SERVER_ADDRESS, VITE_SERVER_PORT }  = import.meta.env    
     const url = `http://${VITE_SERVER_ADDRESS}:${VITE_SERVER_PORT}/posts`
-    const formData = new FormData()
-        formData.append("content", this.content)
-        formData.append("image", this.selectedImage)
-const options = {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+    const options = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            method: "GET",        
+            }
+            console.log("options:", options)
             
-            "Accept": "application/json"
-        },
-        method: "PUT",
-            body: formData     
-        }
-        console.log("options:", options)
-
+            console.log("the request will de sent to the following address:" , url + "/LikePost?userId=" +userId +"&postId=" + postId)
+            fetch(url + "/LikePost?userId=" +userId +"&postId=" + postId,  options)
+                .then((res) =>{
+                if (res.status === 200) {
+                return res.json()        
+            } else {
+                throw new Error("failed to like this post")
+            }
+            })
+            .then((res) => {
+            console.log('res:',res)
+            this.$router.go()       
+            })
+            .catch((err) => console.log("err:",err))
         
-        console.log("the request will de sent to the following address:" , url + "/" + this.$props.id)
-        console.log("options:", options)
-        fetch(url + "/" +this.$props.id,  options)
-            .then((res) =>{
-            if (res.status === 200) {
-            return res.json()        
-        } else {
-            throw new Error("failed to update post")
-        }
-        })
-        .then((res) => {
-        console.log('res:',res)
-        //this.$router.go()   
-        this.$router.push("/home") 
-        })
-        .catch((err) => console.log("err:",err))    
-    },*/
-    likePost(){
-        const { VITE_SERVER_ADDRESS, VITE_SERVER_PORT }  = import.meta.env    
-    const url = `http://${VITE_SERVER_ADDRESS}:${VITE_SERVER_PORT}/posts`
-const options = {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            "Content-Type": "application/json",
-            
-        },
-        method: "POST",        
-        }
-        console.log("options:", options)
-        
-        console.log("the request will de sent to the following address:" , url + "/" + this.$props.id)
-        fetch(url + "/" +this.$props.id,  options)
-            .then((res) =>{
-            if (res.status === 200) {
-            return res.json()        
-        } else {
-            throw new Error("failed to like this post")
-        }
-        })
-        .then((res) => {
-        console.log('res:',res)
-        this.$router.go()       
-        })
-        .catch((err) => console.log("err:",err))
-
     },    
 }
 }
@@ -154,25 +120,27 @@ const options = {
 </script>
 <template>
 <div class="card mb-3 m-auto">
-    <div class="card-header">
+    <div class="card-header d-flex justify-content-between">
+        <div>
+            <img src="./../../../assets/avatar-circle.png" class="rounded-circle shadow-4" alt="Avatar" />
+            <span>{{ email }}</span> 
+        </div> 
         
-    <img src="./../../../assets/avatar-circle.png" class="rounded-circle shadow-4" alt="Avatar" />
-        <span>{{ email }}</span>                 
-        <i v-if="currentUser === email" class="bi bi-trash3" @click="deletePost"></i> 
-        <span v-if="selectedImage">{{selectedImage.name}}</span>
-        
-        <RouterLink  :to="{name:'EditCategory', params : {id}}"><button  v-if="currentUser === email"    class="btn btn-primary ms-auto rounded-pill">Edit</button></RouterLink>
-        
-        
-        <i v-if="!currentUser === !email" class="bi bi-hand-thumbs-up-fill" @click="likePost" ></i>
-
+        <div>
+            <i v-if="currentUser === email || isAdmin === 1" class="bi bi-trash3 mx-2" @click="deletePost"></i> 
+            <span v-if="selectedImage">{{selectedImage.name}}</span>
+            
+            <RouterLink  :to="{name:'EditCategory', params : {id}}"><button  v-if="currentUser === email || isAdmin === 1"    class="btn btn-primary ms-auto rounded-pill">Edit</button></RouterLink>
+            
+            
+            <i v-if="!currentUser === !email" class="bi bi-hand-thumbs-up-fill" @click="likePost(id, userId)" ></i>
+            <span class="badge bg-danger mx-2">{{this.$props.nbrFans}}</span>
         </div>
+    </div>
     <img v-if="url" :src="url" class="card-img-top" alt="..." />
     <div class="card-body">
     
     <p class="card-text">{{ content }}</p>
-    <RouterLink  :to="{name:'EditText', params : {id}}"><button  v-if="currentUser === email"    class="btn btn-primary ms-auto rounded-pill">Edit</button></RouterLink>
-    <i v-if="currentUser === email" class="bi bi-pen" @click="updateContent"></i>
     <div v-for="comment in comments">
     <Comment :email="comment.user.email" :content="comment.content"></Comment>
     </div>

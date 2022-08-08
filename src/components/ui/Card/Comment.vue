@@ -37,7 +37,6 @@ margin-block:0.3rem ;
 }
 .card-body > .d-flex{   
     margin-bottom: 0.5rem;
-
 }
 .d-flex p{
     margin-bottom: 0;
@@ -46,6 +45,6 @@ margin-block:0.3rem ;
     font-weight: 500;
 }
 body {
-  font-family: var(--bs-font-lato);
+    font-family: var(--bs-font-lato);
 }
 </style>

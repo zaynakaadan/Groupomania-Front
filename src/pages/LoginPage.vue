@@ -37,7 +37,7 @@ fetch(url, options)
 export default {
     name : "LoginPage" ,
     data() {
-      return {email: "zk10-91@hotmail.com", password: "abc123", confirmPassword:"abc123", hasInvalidCredentials:false, error:null, isLoginMode:true}
+      return {email: "", password: "", confirmPassword:"", hasInvalidCredentials:false, error:null, isLoginMode:true}
     },
     methods: {
       submitForm,
@@ -71,8 +71,7 @@ fetch(url, options)
       })                        
     })
     .then((res) => {   
-        this.$router.go()
-         
+        this.$router.go()         
     })
   .catch((err) => {
     this.error = error
@@ -155,49 +154,29 @@ body {
   padding-bottom: 40px;
   background-color: #f5f5f5;
 }
-
 .form-signin {
   width: 100%;
   max-width: 330px;
   padding: 15px;
   margin: auto;
 }
-
 .form-signin .checkbox {
   font-weight: 400;
 }
-
 .form-signin .form-floating:focus-within {
   z-index: 2;
 }
-
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-
 .form-signin input[type="password"] {  
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 button[type="submit"]{
   margin-block: 0.8rem;
-}
-
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-
+}    
 
 </style>

@@ -35,9 +35,11 @@ export default {
         
     .then((res) => {
         console.log("res:", res)
-        const { email, posts } = res        
-        this.currentUser = email
+        const { posts, user } = res        
+        this.currentUser = user.email
         this.posts = posts
+        this.userId = user.id
+        this.isAdmin = user.admin
         console.log("this.posts:", this.posts)
     })
     .catch((err) => console.log("err:",err))
@@ -45,20 +47,20 @@ export default {
         data() {
             return {
                 posts: [],
-                currentUser: null
+                currentUser: null,               
             }
         }
 }
 </script>
 <template>
-<div v-if="currentUser" class="container-sm">
+<div v-if="currentUser "  class="container-sm">
 <div class="col-sm-12">
-    <h1 class="text-center"> Welcome, {{currentUser}}</h1>
+    <h1 class="text-center"> Welcome, {{currentUser}}  </h1>
 </div>
     <PostForm></PostForm>
     <div v-if ="posts.length === 0">No posts to display. Start chatting!</div>
     <div v-for="post in posts">
-        <Card :currentUser="currentUser" :email="post.user.email"  :content="post.content" :url="post.imageUrl" :comments="post.comments" :id="post.id"></Card>
+        <Card :currentUser="currentUser" :userId="userId" :isAdmin="isAdmin" :email="post.user.email"  :content="post.content" :url="post.imageUrl" :comments="post.comments" :id="post.id" :nbrFans="post.fans.length"></Card>
     </div>
 </div>
 </template>
