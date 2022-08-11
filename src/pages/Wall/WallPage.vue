@@ -7,7 +7,7 @@ export default {
         Card,
         PostForm
     },
-    // verify s'il y a token dans local storage
+    // verifier s'il y a token dans local storage
     beforeCreate() {        
         const token = localStorage.getItem("token")
         //si je change ou supprime le token dans local storage il va me rammener sur le page login
@@ -60,7 +60,7 @@ export default {
     <PostForm></PostForm>
     <div v-if ="posts.length === 0">No posts to display. Start chatting!</div>
     <div v-for="post in posts">
-        <Card :currentUser="currentUser" :userId="userId" :isAdmin="isAdmin" :email="post.user.email"  :content="post.content" :url="post.imageUrl" :comments="post.comments" :id="post.id" :nbrFans="post.fans.length"></Card>
+    <Card :currentUser="currentUser" :userId="userId" :isAdmin="isAdmin" :email="post.user.email"  :content="post.content" :url="post.imageUrl" :comments="post.comments" :id="post.id" :nbrFans="post.fans.length"></Card>
     </div>
 </div>
 </template>

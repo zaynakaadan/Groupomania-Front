@@ -16,12 +16,7 @@ return {
 }
 },
 mounted() {},   
-methods: {
-    handleFileSelected(e) {
-
-        //console.log("e:", e.target.files[0])
-        //this.selectedImage = e.target.files[0]
-      },
+methods: {    
     addComment(e){
 console.log(this.currentComment)
 console.log(this.$props.id)
@@ -50,8 +45,6 @@ const options = {
         .then((res) => {
         console.log('res:',res)
         this.$router.go()
-       // this.comments.push(res)
-        //this.currentComment = null
         })
         .catch((err) => console.log("err:",err))
         }, 
@@ -111,46 +104,36 @@ const options = {
             console.log('res:',res)
             this.$router.go()       
             })
-            .catch((err) => console.log("err:",err))
-        
+            .catch((err) => console.log("err:",err))        
     },    
 }
 }
-
 </script>
 <template>
-<div class="card mb-3 m-auto">
+<div class="card mb-3 m-auto">    
     <div class="card-header d-flex justify-content-between">
-        <div>
+        <div class ="d-flex flex-colum comment_text p_1">
             <img src="./../../../assets/avatar-circle.png" class="rounded-circle shadow-4" alt="Avatar" />
             <span>{{ email }}</span> 
-        </div> 
-        
-        <div>
+        </div>                 
+        <div class="d-inline ">            
             <i v-if="currentUser === email || isAdmin === 1" class="bi bi-trash3 mx-2" @click="deletePost"></i> 
-            <span v-if="selectedImage">{{selectedImage.name}}</span>
-            
-            <RouterLink  :to="{name:'EditCategory', params : {id}}"><button  v-if="currentUser === email || isAdmin === 1"    class="btn btn-primary ms-auto rounded-pill">Edit</button></RouterLink>
-            
-            
+            <span v-if="selectedImage">{{selectedImage.name}}</span>            
+            <RouterLink  :to="{name:'EditCategory', params : {id}}"><button  v-if="currentUser === email || isAdmin === 1"    class="btn btn-primary ms-auto rounded-pill">Edit</button></RouterLink>                        
             <i v-if="!currentUser === !email" class="bi bi-hand-thumbs-up-fill" @click="likePost(id, userId)" ></i>
             <span class="badge bg-danger mx-2">{{this.$props.nbrFans}}</span>
-        </div>
+        </div>        
     </div>
     <img v-if="url" :src="url" class="card-img-top" alt="..." />
-    <div class="card-body">
-    
+    <div class="card-body">    
     <p class="card-text">{{ content }}</p>
     <div v-for="comment in comments">
     <Comment :email="comment.user.email" :content="comment.content"></Comment>
     </div>
-
     <div class="d-flex gap-1">
         <div class ="d-flex flex-colum comment_text p_1"></div>
         <Avatar></Avatar>
-
-        <input type="text" class="form-control" placeholder="Username" aria-label="Username" v-model="currentComment" />
-        
+        <input type="text" class="form-control" placeholder="Username" aria-label="Username" v-model="currentComment" />        
         <button @click="addComment" type="button" class="btn btn-primary  ms-auto rounded-pill">Post</button>
     </div>
 </div>
@@ -159,7 +142,7 @@ const options = {
 <style scoped>
 @media  (min-width: 768px) { 
     .card {
-    width: 70%;
+    width: 70%;    
 }
 }
 #file-input {
@@ -171,7 +154,6 @@ const options = {
     color: blue;
     transform: scale(1.1);
 }
-
 .rounded-pill{
     font-size: smaller;
 }
@@ -191,27 +173,19 @@ const options = {
     width: 60px;
     margin-right: 0.6rem;
 }
-.card-body{
-   position: relative; 
+.gap-1{
+    align-items: inherit;
 }
-.card-text{
-    
+.card-body{
+    position: relative; 
+}
+.card-text{    
     display: flex;
     align-items: center;
 }
-.bi-pen{
-    position: absolute;
-top: 1rem;
-    right: 1rem;
-}
-.bi-pen:hover {
-    cursor: pointer;
-    color: blue;
-    transform: scale(1.2);
-}
 .bi-hand-thumbs-up-fill{
     font-size:18px ;
-    padding-left: 0.5rem;
+    padding-left: 0.2rem;
 }
 .bi-hand-thumbs-up-fill:hover {
     cursor: pointer;
@@ -219,8 +193,8 @@ top: 1rem;
     transform: scale(1.2);
 }
 .btn-primary{
-  background-color: #FFD7D7 !important;
-  border-color:#FD2D01 !important;
+    background-color: #FFD7D7 !important;
+    border-color:#FD2D01 !important;
 }
 .btn:hover {
     cursor: pointer;
@@ -230,4 +204,10 @@ top: 1rem;
 .card-text{
     font-family: 'Lato' !important;
 }
+
+
+.d-flex{
+    align-items: center;
+}
+
 </style>

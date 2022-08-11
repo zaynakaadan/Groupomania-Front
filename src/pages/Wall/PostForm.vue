@@ -4,13 +4,10 @@ export default {
     data () {
       return {
         content: "",
-        selectedImage: null,
-        
-
+        selectedImage: null,        
       }
     },
-    methods: {
-      
+    methods: {      
       handleFileSelected(e) {
         console.log("e:", e.target.files[0])
         this.selectedImage = e.target.files[0]

@@ -80,7 +80,7 @@ fetch(url, options)
       }
     },
     watch: {
-      username(Value) {        
+      email(Value) {        
         const isValueEmpty = Value === ""
         this.isFormValid(!isValueEmpty) 
         this.error = null

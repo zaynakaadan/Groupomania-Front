@@ -45,6 +45,7 @@ export default {
     })
     .then((res) => {     
         this.$router.push("/home") 
+        
     })
       .catch((err) => console.log("err:",err))
       }  

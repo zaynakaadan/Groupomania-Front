@@ -15,15 +15,15 @@ const router = createRouter({ history: createWebHistory(), routes })
 //Guard
 router.beforeEach((to, from) => {   
 if (isLoginRequires(to)) {
-    return router.push("/login")
+    return router.push("/login")//pour navigate à different URL
     }
 })
 function isLoginRequires(to) {
 //on est pas dans une page privée 
-if (!isPrivatePage(to)) return false
+if (!isPrivatePage(to)) return false//on est dans page publique pas besoin login return false
 //  verify le token dans le cache
-if ( !isTokenInCache()) return true
-return false
+if ( !isTokenInCache()) return true//il y a pas  token in cache ça  vous dire oui il faut loger return true
+return false//le login pas required
 }
 
 function isPrivatePage(to) {
